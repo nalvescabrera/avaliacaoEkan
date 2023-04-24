@@ -2,30 +2,48 @@ package br.com.beneficiario.beneficiario.controller;
 
 
 import br.com.beneficiario.beneficiario.modelo.Beneficiario;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import br.com.beneficiario.beneficiario.repositorio.BeneficiarioRepositorio;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+import java.util.Optional;
 
 
 @RestController
 @RequestMapping("/beneficiarios")
 public class BeneficiarioController {
 
-    @GetMapping
-    public Beneficiario getInfo(){
+    @Autowired
+    private BeneficiarioRepositorio beneficiarioRepositorio;
 
-        Beneficiario b1 = new Beneficiario();
-        b1.setNome("Natalia");
-        b1.setTelefone("998096267");
-        b1.setDataNascimento("03/02/1994");
-        b1.setDataInclusao(FormatData());
-        b1.setDataAtualizacao(FormatData());
-        return b1;
+    @GetMapping
+    public List<Beneficiario> listar(){
+        return beneficiarioRepositorio.findAll();
+    }
+
+    @PostMapping
+    public void cadastrar(@RequestBody Beneficiario b1){
+        beneficiarioRepositorio.save(b1);
+    }
+
+//    @PutMapping
+//    public void alterar(RequestBody Beneficiario beneficiario){
+//        beneficiarioRepositorio.save(beneficiario);
+//    }
+
+    @DeleteMapping("/{id}")
+    public void deletar(@PathVariable Long id){
+        beneficiarioRepositorio.deleteById(id);
+    }
+
+    @GetMapping("/{id}")
+    public Optional<Beneficiario> ler(@PathVariable Long id){
+         return beneficiarioRepositorio.findById(id);
     }
 
     public Date FormatData(){
