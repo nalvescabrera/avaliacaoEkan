@@ -1,31 +1,44 @@
 package br.com.beneficiario.beneficiario.service;
 
 import br.com.beneficiario.beneficiario.modelo.Beneficiario;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import br.com.beneficiario.beneficiario.repositorio.BeneficiarioRepositorio;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
+
 
 @Service
 public class BeneficiarioService {
 
-    private List<Beneficiario> beneficiarios;
+    @Autowired
+    private BeneficiarioRepositorio repository;
 
 
-    public void createBeneficiarioList() {
-        if(beneficiarios == null) {
-            beneficiarios = new ArrayList<>();
-        }
+    public List<Beneficiario> findAll()
+    {
+        return repository.findAll();
     }
 
-    public boolean isJSONValid(String jsonInString) {
-        try {
-            return new ObjectMapper().readTree(jsonInString) != null;
-        } catch (IOException e) {
-            return false;
-        }
+    public Beneficiario save(Beneficiario type)
+    {
+        return repository.save(type);
     }
+
+    public void delete(Long id)
+    {
+        repository.deleteById(id);
+    }
+
+    public Beneficiario findOne(Long id)
+    {
+        return repository.findById(id).get();
+    }
+
+    private Beneficiario update(Beneficiario type)
+    {
+        return repository.save(type);
+    }
+
 
 }
