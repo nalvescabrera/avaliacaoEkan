@@ -1,17 +1,17 @@
 package br.com.beneficiario.beneficiario.controller;
 
-
 import br.com.beneficiario.beneficiario.modelo.Beneficiario;
+import br.com.beneficiario.beneficiario.modelo.Documento;
 import br.com.beneficiario.beneficiario.repositorio.BeneficiarioRepositorio;
+import br.com.beneficiario.beneficiario.repositorio.DocumentoRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 
-import java.text.ParseException;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 
 @RestController
@@ -20,41 +20,36 @@ public class BeneficiarioController {
 
     @Autowired
     private BeneficiarioRepositorio beneficiarioRepositorio;
+    private DocumentoRepositorio documentoRepositorio;
 
     @GetMapping
+    //Listar todos os bendeficarios cadastrados
     public List<Beneficiario> listar(){
         return beneficiarioRepositorio.findAll();
     }
 
     @PostMapping
+    //Cadastrar um beneficiario junto com os seus documentos
     public void cadastrar(@RequestBody Beneficiario b1){
         beneficiarioRepositorio.save(b1);
     }
 
-//    @PutMapping
-//    public void alterar(RequestBody Beneficiario beneficiario){
-//        beneficiarioRepositorio.save(beneficiario);
-//    }
-
     @DeleteMapping("/{id}")
+    //Remover um beneficiario
     public void deletar(@PathVariable Long id){
         beneficiarioRepositorio.deleteById(id);
     }
 
     @GetMapping("/{id}")
-    public Optional<Beneficiario> ler(@PathVariable Long id){
-         return beneficiarioRepositorio.findById(id);
+    //Listar todos os documentos de um beneficiário a partir de seu id;
+    public List<Documento> ler(@PathVariable Long id){
+        return beneficiarioRepositorio.findById(id).get().getDocumento();
     }
 
-    public Date FormatData(){
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        Date dataHoraAtual = new Date();
-        try {
-            dataHoraAtual = formatter.parse("24/07/2020 03:14:06");
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return dataHoraAtual;
+    @PutMapping("/{id}")
+    //Atualizar os dados cadastrais de um beneficiário;
+    public void alterar(@RequestBody Beneficiario b1){
+        beneficiarioRepositorio.save(b1);
     }
 
 }
