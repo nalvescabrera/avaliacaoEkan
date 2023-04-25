@@ -1,0 +1,126 @@
+{
+	"info": {
+		"_postman_id": "3c2d10b2-4c94-497c-a1fe-f28e0c1a67b2",
+		"name": "Beneficiario",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "5448862"
+	},
+	"item": [
+		{
+			"name": "Get Beneficiarios",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/beneficiarios",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"beneficiarios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Beneficiario",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/beneficiarios/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"beneficiarios",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Beneficiarios Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/beneficiarios/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"beneficiarios",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Alterar Beneficiario",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\r\n        \"id\": 1,\r\n        \"nome\": \"Larissa Alves\",\r\n        \"telefone\": \"99999999\",\r\n        \"dataNascimento\": \"05/06/1988\",\r\n        \"dataInclusao\": \"2023-04-25\",\r\n        \"dataAtualizacao\": \"2023-04-25\",\r\n        \"documento\": [\r\n            {\r\n                \"idDocumento\": 2,\r\n                \"tipoDocumento\": \"excel\",\r\n                \"descricao\": \"dados do beneficiario\",\r\n                \"dataInclusao\": \"2023-04-25\",\r\n                \"dataAtualizacao\": \"2023-04-25\"\r\n            },\r\n            {\r\n                \"idDocumento\": 3,\r\n                \"tipoDocumento\": \"word\",\r\n                \"descricao\": \"telefone\",\r\n                \"dataInclusao\": \"2023-04-25\",\r\n                \"dataAtualizacao\": \"2023-04-25\"\r\n            }\r\n        ]\r\n    }\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/beneficiarios/7",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"beneficiarios",
+						"7"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Incluir Beneficiario",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nome\": \"Natalia\",\r\n  \"telefone\":\"99999999\",\r\n  \"dataNascimento\":\"03/02/1988\",\r\n  \"documento\":[\r\n        {\r\n        \"tipoDocumento\":\"excel\",\r\n        \"descricao\":\"dados do beneficiario\"\r\n        },\r\n        {\r\n        \"tipoDocumento\":\"word\",\r\n        \"descricao\":\"telefone\"\r\n        }\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/beneficiarios",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"beneficiarios"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
